@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Airship shuttle stat tweaks:
+	- Cargo capacity (CompProperties_Transporter massCapacity): 800kg -> 1600kg.
+	- Range tuned so a FULL tank covers a round trip (out and back). A round trip at max range costs
+	  2 * fixedLaunchDistanceMax * fuelPerTile fuel (rangeDistanceFactor cancels), so to fit 400 fuel:
+	  fixedLaunchDistanceMax <= 400 / (2 * 3) = 66.67 -> 66. That is ~198 tiles one-way, ~396 fuel for
+	  the round trip (just under the 400 capacity).
+-->
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Medieval Transport</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/comps/li[@Class="CompProperties_Transporter"]/massCapacity</xpath>
+					<value>
+						<massCapacity>1600</massCapacity>
+					</value>
+				</li>
+
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/comps/li[@Class="CompProperties_Launchable"]/fixedLaunchDistanceMax</xpath>
+					<value>
+						<fixedLaunchDistanceMax>66</fixedLaunchDistanceMax>
+					</value>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

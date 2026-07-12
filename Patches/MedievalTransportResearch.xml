@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Move vanilla "Transport pod" (Core) and "Shuttle" (Odyssey) research into the medieval era,
+	chained under Medieval Overhaul's Engineering: Engineering -> TransportPod -> Shuttles.
+	Both are retuned to research at MO's advanced research bench. Gated on Medieval Overhaul so
+	DankPyon_Engineering / DankPyon_AdvancedResearchBench exist.
+
+	(Intended to be used with Medieval Transport disabled, so vanilla transport pods + shuttle are
+	the medieval transport techs.)
+-->
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Medieval Overhaul</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+
+				<!-- ===== Transport pod (Core) ===== -->
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ResearchProjectDef[defName="TransportPod"]/techLevel</xpath>
+					<value>
+						<techLevel>Medieval</techLevel>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ResearchProjectDef[defName="TransportPod"]/prerequisites</xpath>
+					<value>
+						<prerequisites>
+							<li>DankPyon_Engineering</li>
+							<!-- Tar research (for chemfuel) and Steel research (for steel ingots),
+							     the materials the medieval transport pod/shuttle are built from. -->
+							<li>DankPyon_Tar</li>
+							<li>DankPyon_Steel</li>
+						</prerequisites>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ResearchProjectDef[defName="TransportPod"]/requiredResearchBuilding</xpath>
+					<value>
+						<requiredResearchBuilding>DankPyon_AdvancedResearchBench</requiredResearchBuilding>
+					</value>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ResearchProjectDef[defName="TransportPod"]/hiddenPrerequisites</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ResearchProjectDef[defName="TransportPod"]/hiddenPrerequisites</xpath>
+					</match>
+				</li>
+
+				<!-- ===== Shuttle (Odyssey) ===== -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]</xpath>
+					<match Class="PatchOperationSequence">
+						<operations>
+							<li Class="PatchOperationReplace">
+								<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/label</xpath>
+								<value>
+									<label>airship</label>
+								</value>
+							</li>
+							<li Class="PatchOperationReplace">
+								<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/description</xpath>
+								<value>
+									<description>Construct a chemfuel-powered airship fit for long-distance travel across the planet's surface.</description>
+								</value>
+							</li>
+							<li Class="PatchOperationReplace">
+								<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/techLevel</xpath>
+								<value>
+									<techLevel>Medieval</techLevel>
+								</value>
+							</li>
+							<li Class="PatchOperationReplace">
+								<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/prerequisites</xpath>
+								<value>
+									<prerequisites>
+										<li>TransportPod</li>
+									</prerequisites>
+								</value>
+							</li>
+							<li Class="PatchOperationReplace">
+								<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/requiredResearchBuilding</xpath>
+								<value>
+									<requiredResearchBuilding>DankPyon_AdvancedResearchBench</requiredResearchBuilding>
+								</value>
+							</li>
+							<li Class="PatchOperationConditional">
+								<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/requiredResearchFacilities</xpath>
+								<match Class="PatchOperationRemove">
+									<xpath>/Defs/ResearchProjectDef[defName="Shuttles"]/requiredResearchFacilities</xpath>
+								</match>
+							</li>
+						</operations>
+					</match>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

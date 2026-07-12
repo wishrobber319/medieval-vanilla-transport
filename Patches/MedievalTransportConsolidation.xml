@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Consolidate Medieval Transport (Crows.MedievalTransport) onto the vanilla medieval transport
+	research instead of its own duplicate research. Its reskinned buildings are rerouted to the
+	vanilla TransportPod/Shuttles research, then the duplicate "medieval drop pods" / "medieval
+	airship" research projects are removed from the tree. The medieval pod/airship skins are kept.
+
+	Gated on Medieval Transport so it cleanly no-ops if that mod is disabled. (The airship reroute
+	targets the Odyssey "Shuttles" research; with Odyssey present, as in this setup.)
+-->
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Medieval Transport</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+
+				<!-- Reskinned medieval pods -> vanilla Transport pod research. -->
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_MedTransportPod"]/researchPrerequisites/li[text()="Crows_MedievalPodResearch"]</xpath>
+					<value>
+						<li>TransportPod</li>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_MedPodLauncher"]/researchPrerequisites/li[text()="Crows_MedievalPodResearch"]</xpath>
+					<value>
+						<li>TransportPod</li>
+					</value>
+				</li>
+
+				<!-- Reskinned airship -> vanilla Shuttle research. -->
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/researchPrerequisites/li[text()="Crows_AirshipShuttleResearch"]</xpath>
+					<value>
+						<li>Shuttles</li>
+					</value>
+				</li>
+
+				<!-- Remove the now-unused duplicate research projects. NOTE: deleting a research def
+				     is only safe on a NEW save. An existing save that has these in its ResearchManager
+				     progress dictionary will throw "Could not load reference" + null-key corruption on
+				     load. Start a fresh game with this enabled. -->
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ResearchProjectDef[defName="Crows_MedievalPodResearch"]</xpath>
+				</li>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ResearchProjectDef[defName="Crows_AirshipShuttleResearch"]</xpath>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

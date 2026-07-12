@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Replicates the "Passenger Shuttle Have No Cooldown" mod: set CompProperties_Launchable's
+	cooldownTicks to 1 on every launchable thing (passenger shuttles, transport pods, drop pods,
+	airship, etc.). Done as plain def data so that mod can be removed.
+
+	Two operations cover both cases: replace it where a def declares cooldownTicks (e.g. vanilla
+	PassengerShuttle and Crows_AirshipShuttle, which have long cooldowns), and add it where a def
+	leaves it at the default. Each is guarded by a conditional so it is a no-op if nothing matches.
+-->
+<Patch>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef/comps/li[@Class="CompProperties_Launchable"]/cooldownTicks</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef/comps/li[@Class="CompProperties_Launchable"]/cooldownTicks</xpath>
+			<value>
+				<cooldownTicks>1</cooldownTicks>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef/comps/li[@Class="CompProperties_Launchable" and not(cooldownTicks)]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef/comps/li[@Class="CompProperties_Launchable" and not(cooldownTicks)]</xpath>
+			<value>
+				<cooldownTicks>1</cooldownTicks>
+			</value>
+		</match>
+	</Operation>
+
+</Patch>

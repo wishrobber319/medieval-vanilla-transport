@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Reskin Crows_AirshipShuttle to Medieval Trader Airships' "Hermes" zeppelin. We just point the
+	texPath at MTA's texture (referenced, not copied), so it only needs that mod loaded. The east
+	Hermes sprite is the horizontal/side view, which fits the wide (6,4) building and the existing
+	Graphic_Single setup. shaderType -> Cutout because the Hermes masks use a non-standard "...eastm"
+	name that CutoutComplex wouldn't find; the art is already fully coloured so no mask is needed.
+	Changing graphicData updates the research-tree node, build-menu icon, and the placed building.
+
+	Nested FindMod requires BOTH Medieval Trader Airships (the texture) and Medieval Transport (the
+	building), since PatchOperationFindMod is OR across a single list.
+-->
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Medieval Trader Airships</li>
+		</mods>
+		<match Class="PatchOperationFindMod">
+			<mods>
+				<li>Medieval Transport</li>
+			</mods>
+			<match Class="PatchOperationSequence">
+				<operations>
+
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/graphicData/texPath</xpath>
+						<value>
+							<texPath>TraderShips/Parts/base/Hermes/RX97_Hermes_east</texPath>
+						</value>
+					</li>
+
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/graphicData/shaderType</xpath>
+						<value>
+							<shaderType>Cutout</shaderType>
+						</value>
+					</li>
+
+					<!-- The Hermes sprite is a 1:1 (near-square) canvas, so the drawSize must be square
+					     to avoid horizontal stretching. (6,6) matches the building width and keeps the
+					     zeppelin's real proportions. -->
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/graphicData/drawSize</xpath>
+						<value>
+							<drawSize>(8, 8)</drawSize>
+						</value>
+					</li>
+
+					<!-- Also reskin the takeoff/landing skyfaller forms, which otherwise revert to the
+					     old MT airship texture. Match the parked building: Hermes east, Cutout, (8,8),
+					     Graphic_Single (so it stays the same horizontal airship through the animation). -->
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleIncoming"]/graphicData/texPath</xpath>
+						<value><texPath>TraderShips/Parts/base/Hermes/RX97_Hermes_east</texPath></value>
+					</li>
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleIncoming"]/graphicData/graphicClass</xpath>
+						<value><graphicClass>Graphic_Single</graphicClass></value>
+					</li>
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleIncoming"]/graphicData/shaderType</xpath>
+						<value><shaderType>Cutout</shaderType></value>
+					</li>
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleIncoming"]/graphicData/drawSize</xpath>
+						<value><drawSize>(8, 8)</drawSize></value>
+					</li>
+
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleLeaving"]/graphicData/texPath</xpath>
+						<value><texPath>TraderShips/Parts/base/Hermes/RX97_Hermes_east</texPath></value>
+					</li>
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleLeaving"]/graphicData/graphicClass</xpath>
+						<value><graphicClass>Graphic_Single</graphicClass></value>
+					</li>
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleLeaving"]/graphicData/shaderType</xpath>
+						<value><shaderType>Cutout</shaderType></value>
+					</li>
+					<li Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttleLeaving"]/graphicData/drawSize</xpath>
+						<value><drawSize>(8, 8)</drawSize></value>
+					</li>
+
+				</operations>
+			</match>
+		</match>
+	</Operation>
+
+</Patch>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Restrict Medieval Transport's fuelled buildings to Chemfuel only. Their own defs add
+	DankPyon_Tar + DankPyon_Coal to the fuel filter, and Medieval Overhaul's Add_FuelFilter then
+	adds wood categories (because coal is present). We replace the whole fuelFilter with Chemfuel,
+	wiping those extras. This mod loads after Medieval Overhaul, so the replacement wins.
+
+	Targets the airship shuttle and the medieval pod launcher (the two with a refuelable fuel tank).
+	Vanilla PassengerShuttle is already Chemfuel-only; the medieval transport pod has no fuel tank
+	(it launches via the launcher). Gated on Medieval Transport.
+-->
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Medieval Transport</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter</xpath>
+					<value>
+						<fuelFilter>
+							<thingDefs>
+								<li>Chemfuel</li>
+							</thingDefs>
+						</fuelFilter>
+					</value>
+				</li>
+
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Crows_MedPodLauncher"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter</xpath>
+					<value>
+						<fuelFilter>
+							<thingDefs>
+								<li>Chemfuel</li>
+							</thingDefs>
+						</fuelFilter>
+					</value>
+				</li>
+
+				<!-- MO's Add_FuelFilter bolted on its fuel-storage comp and the "Fuel" inspector tab
+				     because coal used to be in the filter. With the filter back to chemfuel-only those
+				     are redundant - remove them so only the standard refuelable fuel bar remains. -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="Crows_AirshipShuttle"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+					</match>
+				</li>
+
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Crows_MedPodLauncher"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="Crows_MedPodLauncher"]/inspectorTabs/li[.="MedievalOverhaul.ITab_Fuel"]</xpath>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Crows_MedPodLauncher"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="Crows_MedPodLauncher"]/comps/li[@Class="MedievalOverhaul.CompProperties_StoreFuelThing"]</xpath>
+					</match>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

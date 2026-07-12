@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	When Medieval Transport is present, hide the vanilla-skinned transport buildings so only its
+	medieval reskins are buildable. The vanilla Transport pod / Shuttle research still drives the
+	tree (and unlocks the rerouted Crows reskins); we just remove the plain vanilla PassengerShuttle,
+	TransportPod and PodLauncher from the build menu (designationCategory) and from the research
+	cards (researchPrerequisites). Gated on Medieval Transport so vanilla stays buildable without it.
+
+	Safe on existing saves (only touches ThingDefs, not ResearchProjectDefs).
+-->
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Medieval Transport</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+
+				<!-- Vanilla passenger shuttle (Odyssey) -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="PassengerShuttle"]/designationCategory</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="PassengerShuttle"]/designationCategory</xpath>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="PassengerShuttle"]/researchPrerequisites</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="PassengerShuttle"]/researchPrerequisites</xpath>
+					</match>
+				</li>
+
+				<!-- Vanilla transport pod -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="TransportPod"]/designationCategory</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="TransportPod"]/designationCategory</xpath>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="TransportPod"]/researchPrerequisites</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="TransportPod"]/researchPrerequisites</xpath>
+					</match>
+				</li>
+
+				<!-- Vanilla pod launcher -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="PodLauncher"]/designationCategory</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="PodLauncher"]/designationCategory</xpath>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="PodLauncher"]/researchPrerequisites</xpath>
+					<match Class="PatchOperationRemove">
+						<xpath>/Defs/ThingDef[defName="PodLauncher"]/researchPrerequisites</xpath>
+					</match>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

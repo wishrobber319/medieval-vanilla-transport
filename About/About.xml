@@ -3,14 +3,7 @@
     <packageId>wishRobber.medievalvanillatransport</packageId>
     <name>Medieval Vanilla Transport &amp; Shuttle</name>
     <author>wishRobber</author>
-    <description>Moves vanilla "Transport pod" and "Shuttle" research into the medieval era, chained under Medieval Overhaul's Engineering research: Engineering -> Transport pod -> Shuttle.
-
-- Transport pod: tech level Medieval, requires Medieval Overhaul's Engineering (drops its Microelectronics/Biofuel/Machining prerequisites), researched at Medieval Overhaul's advanced research bench.
-- Shuttle: tech level Medieval, requires Transport pod (drops its Multi-analyzer requirement), researched at the advanced research bench.
-
-If Medieval Transport is also active, its reskinned pod/airship buildings are rerouted onto these vanilla research projects and its duplicate "medieval drop pods" / "medieval airship" research is removed - so you keep the medieval skins without the duplicate tech nodes.
-
-Requires Medieval Overhaul (for the Engineering research and advanced research bench) and the Odyssey DLC for the Shuttle research.</description>
+    <description>Unlock transport pods and shuttles in a medieval game. Moves the vanilla Transport Pod and Shuttle research into the medieval era under Medieval Overhaul's Engineering, giving you long-range travel that fits the setting (and reskins via Medieval Transport if installed).</description>
     <supportedVersions>
         <li>1.6</li>
     </supportedVersions>

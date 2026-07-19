@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ModMetaData>
     <packageId>wishRobber.medievalvanillatransport</packageId>
-    <name>Medieval Vanilla Transport &amp; Shuttle</name>
+    <name>Medieval Transport Shuttle</name>
     <author>wishRobber</author>
     <description>Unlock transport pods and shuttles in a medieval game. Moves the vanilla Transport Pod and Shuttle research into the medieval era under Medieval Overhaul's Engineering, giving you long-range travel that fits the setting (and reskins via Medieval Transport if installed).</description>
     <supportedVersions>

@@ -1,0 +1,10 @@
+[b]Long-range travel that fits the era.[/b] Moves the vanilla Transport Pod and Shuttle research into the medieval tree, so you get long-distance travel without industrial tech.
+
+[hr][/hr]
+[b]What's inside[/b]
+[list]
+[*][b]Medieval research placement.[/b] Transport Pod and Shuttle research sit under Medieval Overhaul's Engineering.
+[*][b]Era-appropriate reach.[/b] Long-range travel that suits a medieval game.
+[*][b]Reskins if you have them.[/b] Uses Medieval Transport's visuals when that mod is installed.
+[*][b]Requires Medieval Overhaul.[/b]
+[/list]
